@@ -1,0 +1,50 @@
+﻿@model IEnumerable<aplication20_07_2019.Models.Projet>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layoutresponsablemarche.cshtml";
+}
+
+<h2>Project</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.id_projet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date_debut)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.libelle_projet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cout_total)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.id_projet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_debut)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.libelle_projet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cout_total)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id_project =item.id_projet}) |
+            @Html.ActionLink("Details", "Details", new {id_project=item.id_projet}) |
+            @Html.ActionLink("Delete", "Delete", new {id_projet=item.id_projet })
+        </td>
+    </tr>
+}
+
+</table>

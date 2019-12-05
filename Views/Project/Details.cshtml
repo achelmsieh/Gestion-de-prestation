@@ -1,0 +1,51 @@
+﻿@model aplication20_07_2019.Models.Projet
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layoutresponsablemarche.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Projet</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.id_projet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.id_projet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.date_debut)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.date_debut)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.libelle_projet)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.libelle_projet)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cout_total)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cout_total)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id_project= Model.id_projet }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

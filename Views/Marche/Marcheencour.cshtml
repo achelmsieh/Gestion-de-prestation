@@ -1,0 +1,74 @@
+﻿@model IEnumerable<aplication20_07_2019.Models.Marché>
+
+@{
+    ViewBag.Title = "Marcheencour";
+    Layout = "~/Views/Shared/_LayoutPrestataire.cshtml";
+}
+
+<h2>Marcheencour</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.matricule)
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Projet.libelle_projet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.montant_total)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date_fin)
+        </th>
+
+        <th>
+            le responsable marche
+        </th>
+
+
+
+
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.matricule)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Projet.libelle_projet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.montant_total)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.date_fin)
+            </td>
+
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Responsable_marché.nom)
+            </td>
+
+
+
+            <td>
+
+                
+                <a href='@string.Format("/Marche/etats?id_marche={0}", item.id_marché  ) ' title="donwload le fichier d'etats de marche"  class="btn btn-info"> <i class="glyphicon glyphicon-download"></i></a>
+                <a href='@string.Format("/Marche/Dashboardresp?id_marche={0}", item.id_marché  ) ' title="voir les details" class="btn btn-info"> <i class="glyphicon glyphicon-eye-open"></i></a>
+
+            </td>
+        </tr>
+    }
+
+</table>

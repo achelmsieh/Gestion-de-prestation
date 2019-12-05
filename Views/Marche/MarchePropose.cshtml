@@ -1,0 +1,69 @@
+﻿@model IEnumerable<aplication20_07_2019.Models.Marché>
+
+@{
+    ViewBag.Title = "MarchePropose";
+    Layout = "~/Views/Shared/_LayoutPrestataire.cshtml";
+}
+
+<h2>Marché Propose</h2>
+
+
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.matricule)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Projet.libelle_projet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Délai)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.budget_prevu)
+        </th>
+
+        <th>
+            le responsable marche
+        </th>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Délai)
+        </th>
+
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.matricule)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Projet.libelle_projet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Délai)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.budget_prevu)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Responsable_marché.nom)
+        </td>
+        
+        
+        
+        <td>
+            
+            @Html.ActionLink("Details", "Details_Participation", new { id_marche=item.id_marché }) |
+            @Html.ActionLink("Refuser", "Refuser", new {id_marche=item.id_marché  })
+        </td>
+    </tr>
+}
+
+</table>

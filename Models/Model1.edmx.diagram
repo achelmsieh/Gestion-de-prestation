@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="3be598533c844d2c90d291dbbb988c02" Name="Diagram1" ZoomLevel="94">
+        <EntityTypeShape EntityType="market_appModel.C__MigrationHistory" Width="1.5" PointX="22.625" PointY="16" IsExpanded="true" />
+        <EntityTypeShape EntityType="market_appModel.Affectation_profils" Width="1.875" PointX="26.125" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="market_appModel.AspNetRole" Width="1.5" PointX="12.125" PointY="14.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="market_appModel.AspNetUserClaim" Width="1.5" PointX="16.125" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="market_appModel.AspNetUserLogin" Width="1.5" PointX="15.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="market_appModel.AspNetUser" Width="1.5" PointX="14.125" PointY="11.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="market_appModel.Domaine" Width="1.5" PointX="22.375" PointY="7.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="market_appModel.Marché" Width="1.5" PointX="19.875" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="market_appModel.message" Width="1.5" PointX="12.25" PointY="5.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="market_appModel.Mission" Width="1.5" PointX="24.25" PointY="10" IsExpanded="true" />
+        <EntityTypeShape EntityType="market_appModel.Ordre_service" Width="1.5" PointX="22.125" PointY="12.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="market_appModel.Participation" Width="1.5" PointX="19" PointY="4" IsExpanded="true" />
+        <EntityTypeShape EntityType="market_appModel.prestataire" Width="1.5" PointX="14.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="market_appModel.Profil" Width="1.5" PointX="25.125" PointY="5.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="market_appModel.Projet" Width="1.5" PointX="19.25" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="market_appModel.Responsable_marché" Width="1.5" PointX="15.375" PointY="7.5" IsExpanded="true" />
+        <AssociationConnector Association="market_appModel.FK_Affectation_profils_Mission" ManuallyRouted="false" />
+        <AssociationConnector Association="market_appModel.FK_Affectation_profils_Profils" ManuallyRouted="false" />
+        <AssociationConnector Association="market_appModel.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="market_appModel.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" ManuallyRouted="false" />
+        <AssociationConnector Association="market_appModel.FK_prestataire_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="market_appModel.FK_Responsable_marché_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="market_appModel.FK_Mission_Domaine" ManuallyRouted="false" />
+        <AssociationConnector Association="market_appModel.FK_Marché_prestataire" ManuallyRouted="false" />
+        <AssociationConnector Association="market_appModel.FK_Marché_Projet" ManuallyRouted="false" />
+        <AssociationConnector Association="market_appModel.FK_Marché_Responsable_marché" ManuallyRouted="false" />
+        <AssociationConnector Association="market_appModel.FK_Mission_Marché" ManuallyRouted="false" />
+        <AssociationConnector Association="market_appModel.FK_Participation_Marché" ManuallyRouted="false" />
+        <AssociationConnector Association="market_appModel.FK_message_prestataire1" ManuallyRouted="false" />
+        <AssociationConnector Association="market_appModel.FK_message_Responsable_marché" ManuallyRouted="false" />
+        <AssociationConnector Association="market_appModel.FK_Mission_Ordre_service" ManuallyRouted="false" />
+        <AssociationConnector Association="market_appModel.FK_Ordre_service_Projet1" ManuallyRouted="false" />
+        <AssociationConnector Association="market_appModel.FK_Participation_prestataire" ManuallyRouted="false" />
+        <AssociationConnector Association="market_appModel.AspNetUserRoles" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="market_appModel.Participation_profil" Width="2.375" PointX="21.5" PointY="4" />
+        <AssociationConnector Association="market_appModel.FK_Participation_profil_Profils" />
+        <AssociationConnector Association="market_appModel.FK_Participation_profil_Affectation_profils1" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,71 @@
+﻿@model IEnumerable<aplication20_07_2019.Models.prestataire>
+
+@{
+    ViewBag.Title = "Index";
+   if (User.IsInRole("admin"))
+
+        {
+            Layout = "~/Views/Shared/_LayoutPrestataire.cshtml";
+
+        }
+     if (@User.IsInRole("responsable_marche"))
+    {
+        Layout = "~/Views/Shared/_Layoutresponsablemarche.cshtml";
+    }
+
+}
+
+<h2>les prestataire eregistrer dans le site de l'oncf:</h2>
+
+
+<table class="table">
+    <tr>
+        <th></th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser.UserName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.libelle)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.raison_social)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @if (item.image_prestataire != null)
+        {
+            <img src="@String.Format("data:image/png;base64,{0}",Convert.ToBase64String(item.image_prestataire))" width="150" height="50" />
+        }
+    </td>
+
+    <td>
+        @Html.DisplayFor(modelItem => item.AspNetUser.UserName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.libelle)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.raison_social)
+    </td>
+
+    <td>
+        @Html.ActionLink("Details", "Details", new { id_prestataire = item.id_prestataire })
+
+
+        @if (User.IsInRole("admin"))
+
+        {@Html.ActionLink("Edit", "Edit", new { id = item.id_prestataire })}
+        @if (User.IsInRole("admin"))
+        {@Html.ActionLink("Delete", "Delete", new { id = item.id_prestataire })
+    }
+
+    </td>
+</tr>
+}
+
+</table>

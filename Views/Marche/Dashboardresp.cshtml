@@ -1,0 +1,912 @@
+﻿
+@{
+    ViewBag.Title = "Dashboardresp";
+
+    if (@User.IsInRole("responsable_marche"))
+    {
+        Layout = "~/Views/Shared/_Layoutresponsablemarche.cshtml";
+    }
+    if (@User.IsInRole("prestataire"))
+    {
+        Layout = "~/Views/Shared/_LayoutPrestataire.cshtml";
+    }
+}
+<div class="row">
+    <div class="col-md-6">
+        <h2 class="text-center">Les detaille de Marche :@ViewBag.Marche.Projet.libelle_projet</h2>
+    </div>
+    <div class="col-md-6">
+        @if (@ViewBag.prestataire.image_prestataire != null)
+        {
+            <img class="img-thumbnail center-block" src="@String.Format("data:image/png;base64,{0}",Convert.ToBase64String(@ViewBag.prestataire.image_prestataire))" width="150" height="50" />
+        }
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-4">
+
+        <dl>
+            <dt>libelle:</dt>
+            <dd>@ViewBag.prestataire.libelle</dd>
+            <dt>Raison sociale:</dt>
+            <dd>@ViewBag.prestataire.raison_social</dd>
+        </dl>
+
+    </div>
+    <div class="col-md-6">
+        <dl>
+            <dt>Budget :</dt>
+            <dd>@ViewBag.marche.budget_prevu</dd>
+            <dt> Date final:</dt>
+            <dd>@ViewBag.marche.date_fin</dd>
+        </dl>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/0.2.0/Chart.min.js" type="text/javascript"></script>
+
+<style>
+    .inline, .card {
+        display: inline-block;
+        width: 40px;
+        vertical-align: top;
+    }
+</style>
+
+
+
+
+<div class="col-md-12">
+    <div class="panel panel-primary ">
+        <div class="panel-heading text-center">
+            Progression du marche
+            <!-- <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar"
+                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="20"
+                     style="width: @(ViewBag.pourcentage_complete + "px")">
+                    <span class="sr-only">40% Complete</span>
+                </div>
+                <div class="progress-bar progress-bar-info" role="progressbar"
+                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="20"
+                     style="width: @(ViewBag.pourcentage_encour + "px")">
+                    <span class="sr-only">30% Complete (info)</span>
+                </div>
+                <div class="progress-bar progress-bar-warning" role="progressbar"
+                     aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"
+                     style="width: 100px">
+                    <span class="sr-only">20%Complete (warning)</span>
+                </div>
+            </div>-->
+        </div>
+        <div class="panel-body">
+            <div class="col-md-12">
+                <div class="text-center"> les missions restante</div>
+                <table class="table table-bordered table-striped warning ">
+                    <thead>
+                        <tr class="warning">
+                            <td>
+                                id
+                            </td>
+                            <td>
+                                libellé
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.list_desmission_nonlances)
+                        {
+                            <tr>
+                                <td>
+                                    @item.id_mission
+                                </td>
+                                <td>
+                                    @item.libelle_mission
+                                </td>
+
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+            </div>
+            <div class="col-md-12">
+                <div class="text-center"> les missions en cours</div>
+                <table class="table table-bordered table-striped ">
+                    <thead>
+                        <tr class="info">
+                            <td>
+                                id
+                            </td>
+                            <td>
+                                libellé
+                            </td>
+                            <td>
+                                date debut
+                            </td>
+                            <td>
+                                court(HT)
+                            </td>
+                            <td>
+                                charge(JH)
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.list_desmission_encour)
+                        {
+                            <tr>
+                                <td>
+                                    @item.id_mission
+                                </td>
+                                <td>
+                                    @item.libelle_mission
+                                </td>
+                                <td>
+                                    @item.date_debut_mission
+                                </td>
+                                <td>
+                                    @item.cout_ht
+                                </td>
+                                <td>
+                                    @item.charge_jh
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+
+                </table>
+            </div>
+
+            <div class="col-md-12">
+                <div class="text-center"> les missions complet</div>
+                <table class="table table-bordered table-striped ">
+                    <thead>
+                        <tr class="success">
+                            <td>
+                                id
+                            </td>
+                            <td>
+                                libellé
+                            </td>
+                            <td>
+                                date de fin
+                            </td>
+                            <td>
+                                court(HT)
+                            </td>
+                            <td>
+                                charge(JH)
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.list_desmission_complete)
+                        {
+                            <tr>
+                                <td>
+                                    @item.id_mission
+                                </td>
+                                <td>
+                                    @item.libelle_mission
+                                </td>
+                                <td>
+                                    @item.date_fin_mission
+                                </td>
+                                <td>
+                                    @item.cout_ht
+                                </td>
+                                <td>
+                                    @item.charge_jh
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+
+
+            </div>
+            <div class="col-md-12">
+                <div class="text-center"> les missions anullé</div>
+                <table class="table table-bordered table-striped ">
+                    <thead>
+                        <tr class="success">
+                            <td>
+                                id
+                            </td>
+                            <td>
+                                libellé
+                            </td>
+                            <td>
+                                id Ordre_service
+                            </td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.list_desmission_annule)
+                        {
+                            <tr>
+                                <td>
+                                    @item.id_mission
+                                </td>
+                                <td>
+                                    @item.libelle_mission
+                                </td>
+
+                                <td>
+
+                                    @item.Ordre_service.id_ordre_service
+                                </td>
+
+                            </tr>
+                        }
+                    </tbody>
+
+                </table>
+            </div>
+
+            <div class="col-md-4">
+                <div class="text-center"> distribution du Marche selon les etats des Mission</div>
+                <div id="distribution_mission"></div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="text-center"> distribution du Marche selon les etats de réception des  ordres de service</div>
+                <div id="distribution_ordre"></div>
+
+            </div>
+            
+        </div>
+    </div>
+</div>
+<div class="col-md-12">
+    <div class="panel panel-primary ">
+        <div class="panel-heading text-center">
+            Progression des ordres de service
+
+            <ul>
+
+
+                <li class="inline"><a  class="btn btn-info   "> <i class="glyphicon glyphicon-menu-left "></i></a>
+                <li class="inline"><a  class="btn btn-info   "> <i class="glyphicon glyphicon-menu-right "></i></a></li>
+                @if (@User.IsInRole("responsable_marche"))
+                {
+                    <li class="inline"><a onclick="$('#CreationOrdre').modal('show');" class="btn btn-info   "> <i class="glyphicon glyphicon-plus "></i></a></li>
+                }
+            </ul>
+        </div>
+        <div class="panel-body">
+
+            @foreach (var item in ViewBag.listeordre)
+            {
+                <div class=" card text-white bg-success mb-3" style=" width: 45rem;">
+
+                    <div class="card-body ">
+                        <dl class="dl-horizontal">
+                            <dt>
+                                Date provisoire:
+                            </dt>
+
+                            <dd>
+                                @item.date_provisoire
+                            </dd>
+                            <dt>
+                                Etat de reception:
+                            </dt>
+
+                            <dd>
+                                @{string function() { if (item.etat_reception == true) return "reseptioné"; else return "non reptione"; }
+
+                                }
+                                @function()
+                                @*@if (item.etat_reception == false&&@User.IsInRole("responsable_marche"))
+                                    {<a class="btn btn-info   " onclick="reception(@item.id_ordre_service)"><i class="glyphicon glyphicon-pencil "></i></a>}*@
+                            </dd>
+
+                            <dt>
+                                Etat de faturation:
+                            </dt>
+
+                            <dd>
+                                @{string algp() { if (item.etat_reception == true) return "facturé"; else return "non facturé"; }
+                                }
+                                @algp()
+                                @if (item.etat_facturation == false && @User.IsInRole("responsable_marche"))
+                                {
+                                    <a class="btn btn-info   " onclick="facturation(@item.id_ordre_service)"> <i class="glyphicon glyphicon-pencil "></i></a>
+                                }
+                            </dd>
+                            <br />
+                            <br />
+                            <dt>
+                                les missions:
+                            </dt>
+                            <dd>
+                                <table class=" table ">
+                                    <tr>
+                                        <th>Num</th>
+                                        <th>Libelle Mission</th>
+                                        <th>Reception</th>
+                                        <th>Annuler</th>
+                                    </tr>
+
+
+                                    <tbody>
+                                        @{ var i = 0; foreach (var item2 in ViewBag.listmission)
+                                            {
+                                                i++;
+                                                if (item2.mission.id_ordreservice_fk == item.id_ordre_service)
+                                                {
+                                                    <tr>
+                                                        <td>@i</td>
+                                                        <td>@item2.mission.libelle_mission</td>
+                                                        <td>
+                                                            @{ if (item2.mission.date_fin_mission == null)
+                                                                {
+                                                                    if (@User.IsInRole("responsable_marche"))
+                                                                    { <a onclick="fin_Mission(@ViewBag.Marche.id_marché,@item2.mission.id_mission)" class="btn btn-success" title="receptioner"> <i class="glyphicon glyphicon-ok "></i></a>}
+                                                                }
+
+                                                                else
+                                                                {@item2.mission.date_fin_mission
+                                                            }
+                                                            }
+                                                        </td>
+                                                        <td>
+                                                            @{ if (item2.mission.Affectation_profils.Count != 0)
+                                                                {
+                                                                    if (@User.IsInRole("responsable_marche"))
+                                                                    { <a onclick="anuler_Mission(@ViewBag.Marche.id_marché,@item2.mission.id_mission)" class="btn btn-danger   "> <i class="glyphicon glyphicon-remove "></i></a>}
+                                                                }
+
+                                                                else
+                                                                {<text>anuulé</text>
+                                                            }
+                                                            }
+                                                        </td>
+                                                    </tr>
+                                                }
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+
+                            </dd>
+                        </dl>
+                        @{ if (@User.IsInRole("responsable_marche"))
+                            {
+                                <div class="text-center">
+                                    Ajouter une Mision existant:    <a class="btn btn-info   " onclick="ModificationOrdre(@item.id_ordre_service)"> <i class="glyphicon glyphicon-plus-sign "></i></a>
+
+                                </div>
+                                <br />
+                                <div class="text-center">
+                                    Creer une nouvelle  Mision:    <a class="btn btn-info   " onclick="CreerUneMission(@item.id_ordre_service)"> <i class="glyphicon glyphicon-plus-sign "></i></a>
+
+                                </div>}}
+                    </div>
+                </div>
+            }
+
+        </div>
+    </div>
+</div>
+
+@{
+    if (@User.IsInRole("responsable_marche"))
+    {
+
+
+        <div class="modal fade " id="CreationOrdre">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a href="#" class="close" data-dismiss="modal">&times;</a>
+                        <h3 class="modal-title"> Creation d'un Ordre de service</h3>
+
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-horizontal">
+                            <div class="form-group ">
+                                <label class="control-label col-md-4">Date Provisoire:</label>
+                                <div class="col-md-8">
+                                    <input type="date" class="form-control" id="date_provisoire" />
+                                </div>
+                            </div>
+                            <div class="form-group ">
+                                <table class="table">
+                                    <tr>
+                                        <th> Domaine</th>
+                                        <th>Libelle Mission</th>
+                                        <th>Cout</th>
+                                        <th>Select</th>
+
+                                    </tr>
+                                    <tbody>
+                                        @foreach (var item in ViewBag.listmission)
+                                        {
+                                            if (item.mission.id_ordreservice_fk == null)
+                                            {
+                                                <tr>
+                                                    <td>@item.mission.Domaine.libelle_domaine</td>
+                                                    <td>@item.mission.libelle_mission</td>
+                                                    <td>@item.cout</td>
+                                                    <td><input type="checkbox" name="listmission" value="@item.mission.id_mission" id="listmission" /></td>
+                                                </tr>
+                                            }
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer right">
+                        <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                        <a href="#" class="btn btn-success" onclick="CreerOrdre();">Confimer</a>
+
+                    </div>
+
+
+
+
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <div class="modal fade " id="ConfirmerAnulation">
+            <form class="form" method="post" action="/marche/annler_mision">
+
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <a href="#" class="close" data-dismiss="modal">&times;</a>
+                            <h3 class="modal-title"> Confimation d'annulation de la mission:</h3>
+                            voullez-vous de annulé cette mission?
+                        </div>
+                        <div class="modal-body">
+
+
+                        </div>
+                        <div class="modal-footer right">
+                            <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                            <button type="submit">Confimer</button>
+                            <input id="id_marche" name="id_marche" style="display:none" value="@ViewBag.Marche.id_marché" />
+                            <input id="id_mission_annulée" name="id_mission_annulée" style="display:none" />
+                        </div>
+
+
+
+
+
+                    </div>
+
+                </div>
+
+
+            </form>
+        </div>
+        <div class="modal fade " id="Confirmerfin">
+            <form class="form" method="post" action="/marche/fin_Mission">
+
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <a href="#" class="close" data-dismiss="modal">&times;</a>
+                            <h3 class="modal-title"> Modification du Date de fin de mission en :@System.DateTime.Now</h3>
+
+                        </div>
+
+                        <div class="modal-footer right">
+                            <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                            <button type="submit">Confimer</button>
+                            <input id="id_marche" name="id_marche" style="display:none" value="@ViewBag.Marche.id_marché" />
+                            <input id="id_mission" name="id_mission" style="display:none" />
+                        </div>
+
+
+
+
+
+                    </div>
+
+                </div>
+
+
+            </form>
+        </div>
+        <div class="modal fade " id="ajouter_mission">
+
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <a href="#" class="close" data-dismiss="modal">&times;</a>
+                        <h3 class="modal-title"> Ajouter des mission</h3>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table">
+                            <tr>
+                                <th> Domaine</th>
+                                <th>Libelle Mission</th>
+                                <th>Cout</th>
+                                <th>Select</th>
+
+                            </tr>
+                            <tbody>
+                                @foreach (var item in ViewBag.listmission)
+                                {
+                                    if (item.mission.id_ordreservice_fk == null)
+                                    {
+                                        <tr>
+                                            <td>@item.mission.Domaine.libelle_domaine</td>
+                                            <td>@item.mission.libelle_mission</td>
+                                            <td>@item.cout</td>
+                                            <td><input type="checkbox" name="listmissionajoute" value="@item.mission.id_mission" id="listmission" /></td>
+                                        </tr>
+                                    }
+                                }
+                            </tbody>
+                        </table>
+
+                    </div>
+                    <div class="modal-footer right">
+                        <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                        <button onclick="ajouteMission()">Confimer</button>
+                        <input id="id_ordre" name="id_ordre" style="display:none" />
+
+                    </div>
+
+
+
+
+
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+        <div class="modal fade " id="ajouter_unenouvelleMssion">
+
+
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+
+                        <h3 class="modal-title"> Ajouter des une nouvelle mission</h3>
+                    </div>
+                    <div class="modal-body">
+                        <h4>veuillez saisir les information suivant</h4>
+
+                        <div class=" row">
+                            <div class="col-sm-12">
+                                <form class=" form-horizontal ">
+                                    <div class="form-group">
+                                        <label for="profils" class="col-sm-4 control-label">Domaine:</label>
+                                        <div class=" col-sm-8">
+                                            @Html.DropDownList("libelle_domaine", ViewBag.listedomaines as SelectList, "ajoute un domaine", new { @class = "form-control", @Id = "domaine" })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="Libelle_mission" class="col-sm-4 control-label">Libelle de la mission:</label>
+                                        <div class="col-sm-8">
+                                            <input type="text" class="form-control" id="Libelle_mission"
+                                                   placeholder="Enter le Libelle">
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="profils" class="col-sm-4 control-label">Les Profils:</label>
+                                        <div class=" col-sm-8">
+                                            @Html.DropDownList("libelle_profil", ViewBag.listeProfils as SelectList, "ajoute un profils", new { @class = "form-control", @Id = "liste_profils", @onChange = " document.getElementById('nombre_charge').style.display = 'block'" })
+
+                                        </div>
+                                    </div>
+                                    <div class="form-group" style="display:none;" id="nombre_charge">
+                                        <label for="profils" class="col-sm-6 control-label">la charge:</label>
+                                        <div class=" col-sm-4">
+                                            <input type="number" class="form-control" id="charge_nombre"
+                                                   placeholder="la charge a wld 3mi ">
+                                            <a onclick="ajouter_profils()" class="btn btn-info "> <i class="glyphicon glyphicon-ok"></i></a>
+
+                                        </div>
+                                    </div>
+
+
+
+                                </form>
+                            </div>
+                            <div class=" col-sm-12" style="display:none;" id="profils_selectione">
+                                <h4> les profils selectionné :</h4>
+                                <table class="table " id="table_profils">
+                                    <thead>
+
+                                    <th>Suprimer</th>
+
+                                    <th>
+                                        Libelle profil
+                                    </th>
+                                    <th>
+                                        charge profil
+                                    </th>
+
+                                    </thead>
+                                    <tbody></tbody>
+                                </table>
+
+                            </div>
+
+
+
+                        </div>
+
+
+                    </div>
+                    <div class="modal-footer right">
+                        <a href="#" class="btn btn-default" data-dismiss="modal">Cancel</a>
+                        <button onclick="btnSave()" class="btn btn-default">Confimer</button>
+                        <input id="id_ordre" name="id_ordre" style="display:none" />
+
+                    </div>
+
+
+
+
+
+
+                </div>
+
+            </div>
+
+
+
+        </div>
+
+
+    }
+}
+
+<img src="~/Views/img/1.PNG" />
+<img src="~/Views/img/2.PNG" />
+<img src="~/Views/img/3.PNG" />
+<input name="id_ordre" style="display:none" />
+
+<script src="~/Scripts/apexcharts.js"></script>
+<script>
+
+    
+
+    var options = {
+            chart: {
+                width: 380,
+                type: 'pie',
+            },
+            labels: ['Ordre receptioné','Ordre non receptioné'],
+            series: [@ViewBag.pourcentage_ordre_recep,@ViewBag.pourcentage_cordre_nonrecep],
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        }
+
+      var chart = new ApexCharts(document.querySelector("#distribution_ordre"), options);
+        chart.render();
+        options = {
+            chart: {
+                width: 380,
+                type: 'pie',
+            },
+            labels: ['Mission en cour','Mission Complet',  'Mission non lancé', 'Mission annulé'],
+            series: [@ViewBag.pourcentage_encour,@ViewBag.pourcentage_complete,  @ViewBag.pourcentage_nonlances, @ViewBag.pourcentage_annulle],
+            responsive: [{
+                breakpoint: 480,
+                options: {
+                    chart: {
+                        width: 200
+                    },
+                    legend: {
+                        position: 'bottom'
+                    }
+                }
+            }]
+        }
+
+      chart = new ApexCharts(document.querySelector("#distribution_mission"), options);
+        chart.render();
+
+
+
+
+
+    function ModificationOrdre(a)
+    {
+        document.getElementById("id_ordre").value = a;
+        $('#ajouter_mission').modal('show');
+    }
+    function CreerUneMission(a)
+    {document.getElementById("id_ordre").value = a;
+        $('#ajouter_unenouvelleMssion').modal('show');
+    }
+    function ajouteMission()
+    {
+
+        var id_ordre = $("#id_ordre").val();
+        var listmission = new Array();
+
+        $("input:checkbox[name=listmissionajoute]:checked").each(function(){
+        listmission.push($(this).val());
+        });
+        var id_marche = $("#id_marche").val();
+
+        $.ajax({
+            url: "/Marche/ajouteMission",
+            type: "post",
+            data: { id_ordre:id_ordre,listmission:listmission,id_marche:id_marche },
+                success: function (r) {
+                    alert(r + " record(s) inserted.");
+                }
+            });
+    }
+    function anuler_Mission(a,b)
+    {
+        $('#ConfirmerAnulation').modal('show');
+        document.getElementById("id_marche").value =a;
+        document.getElementById("id_mission_annulée").value =b;
+    }
+    function fin_Mission(a,b)
+    {
+        $('#Confirmerfin').modal('show');
+        document.getElementById("id_marche").value =a;
+        document.getElementById("id_mission").value =b;
+    }
+
+    function CreerOrdre()
+    {
+        var date_provisoire = $("#date_provisoire").val();
+        var id_marche = $("#id_marche").val();
+        var listmission = new Array();
+
+        $("input:checkbox[name=listmission]:checked").each(function(){
+        listmission.push($(this).val());
+        });
+        //$('#listmission').each(function () {
+          //  listmission.push($(this).val());
+        //});
+
+        $.ajax({
+            url: "/Marche/Creer_ordre",
+            type: "post",
+            data: { date_provisoire:date_provisoire,listmission:listmission,id_marche:id_marche },
+                success: function (r) {
+                    alert(r + " record(s) inserted.");
+                }
+            });
+            }
+    function reception(a)
+    {
+        $.ajax({
+            url: "/Marche/reception",
+            type: "post",
+            data: { id_ordre:a}
+            });
+        var s;
+    }
+    function facturation(a) {
+        $.ajax({
+            url: "/Marche/facturation",
+            type: "post",
+            data: { id_ordre: a},
+            success: function (r) {
+                alert(r + " record(s) inserted.");
+            }
+        });
+    }
+     var profils = new Array();
+    function ajouter_profils() {
+
+        var e = document.getElementById("liste_profils");
+        var libele=e.options[e.selectedIndex].text;
+        //affichage
+
+        if (!(profils.includes(libele) || libele == 'ajoute un profils')) {
+            document.getElementById("profils_selectione").style.display = "block";
+
+            profils.push(libele);
+            var libelle_profil = libele
+            var tBody = $("#table_profils > TBODY")[0];
+            var row = tBody.insertRow(-1);
+            cell = $(row.insertCell(-1));
+
+            var btnRemove = $("<input />");
+            btnRemove.attr("type", "button");
+            btnRemove.attr("onclick", "Remove_profil(this);");
+            btnRemove.val("Suprimer");
+            btnRemove.attr("class", "btn btn-default ");
+            cell.append(btnRemove);
+            var cell = $(row.insertCell(-1));
+            cell.html(libelle_profil);
+            //ajout d'une inpute cherger profil
+
+            cell = $(row.insertCell(-1));
+            cell.html(document.getElementById("charge_nombre").value);
+            document.getElementById("charge_nombre").value = "";
+            document.getElementById("nombre_charge").style.display = "none";
+        }
+        else
+            alert("profil déja selctione");
+        //
+            }
+    function Remove_profil(button) {
+        //Determine the reference of the Row using the Button.
+        var row = $(button).closest("TR");
+        var name = $("TD", row).eq(1).html();
+        if (confirm("Vous voullez suprimer le profils nomé: " + name+".  dans votre selctione")) {
+            //Get the reference of the Table.
+            var table = $("#table_profils")[0];
+
+            //Delete the Table row using it's Index.
+            table.deleteRow(row[0].rowIndex);
+        }
+            }
+    function btnSave() {
+        var id_marche = $("#id_marche").val();
+        var id_ordre = document.getElementById("id_ordre").value;
+        var mission = new Object();
+        var missionvm = new Object();
+        var domaine = new Object();
+        domaine.libelle_domaine=$("#domaine").val();
+        mission.Domaine = domaine;
+        mission.libelle_mission = $("#Libelle_mission").val();
+
+        var profilschargee = new Array();
+        $('#table_profils > TBODY  > tr ').each(function () {
+
+
+            var row = $(this);
+
+            var pfcharge = new Object();
+            pfcharge.libelle = row.find("TD").eq(1).html();
+            pfcharge.charge = row.find("TD").eq(2).html();
+            profilschargee.push(pfcharge);
+        }  );
+        missionvm.listeprofils = profilschargee;
+        missionvm.mission = mission;
+        ;
+        if ($('#table_profils >tbody >tr').length>=1)
+        {
+            $.ajax({
+
+
+                url: "/Marche/ajouterMission",
+                type: "post",
+                data: {mission:missionvm,id_ordre:id_ordre , id_marche:id_marche },
+                success: function (r) {
+                    alert(r + " record(s) inserted.");
+                }
+            });
+        }
+        else
+        { // acun mission n'est dans le  marche
+            alert("ajouter un profil au moin");
+        }
+    }
+</script>

@@ -1,0 +1,65 @@
+﻿@model aplication20_07_2019.Models.Responsable_marché
+
+@{
+    ViewBag.Title = "Information_personnel";
+    Layout = "~/Views/Shared/_Layoutresponsablemarche.cshtml";
+}
+<script>
+
+</script>
+
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4 text-center">
+        les information du votre profil :
+           
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-4"></div>
+        <div class="col-md-4">
+
+            <hr />
+            <dl class="dl-horizontal">
+                
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.nom)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.nom)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.prenom)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.prenom)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.fonction)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.fonction)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.email)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.email)
+                </dd>
+
+               
+
+            </dl>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+

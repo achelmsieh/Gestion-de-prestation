@@ -1,0 +1,160 @@
+﻿@model aplication20_07_2019.Models.prestataire
+
+@{
+    ViewBag.Title = "Information_prstataire";
+    Layout = "~/Views/Shared/_LayoutPrestataire.cshtml";
+}
+
+
+
+<h4>@Html.DisplayFor(model => model.libelle)</h4>
+    <hr />
+<style>
+    .inputfile {
+	width: 0.1px;
+	height: 0.1px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+}
+.inputfile + label {
+    font-size: 1.25em;
+    font-weight: 700;
+    color: white;
+    background-color: black;
+    display: inline-block;
+}
+
+.inputfile:focus + label,
+.inputfile + label:hover {
+    background-color: #FF6600;
+}
+.inputfile + label {
+	cursor: pointer; /* "hand" cursor */
+}
+.inputfile:focus + label {
+	outline: 1px dotted #000;
+	outline: -webkit-focus-ring-color auto 5px;
+}
+</style>
+<div class="container">
+    <!--<div class="jumbotron">
+        <h1>Bootstrap Affix Plugin example</h1>
+    </div>-->
+    <div>
+        <div class="col-md-3">
+            <ul class="nav nav-tabs nav-stacked affix" id="myNav"  style="background-color:#FF6600">
+                <li><a  onclick="afficher(1)" >» Information </a></li>
+                <li><a  onclick="afficher(2)">» Modifier password</a></li>
+                <li><a onclick="afficher(3)">» Parametre</a></li>
+            </ul>
+        </div>
+        <div class="col-md-9">
+            <div id="one" style="display:none">
+                <h2 id="one">Information</h2>
+            
+                <div class="row" >
+                    <div class="col-md-4">
+                        <img src="@String.Format("data:image/png;base64,{0}",@ViewBag.image)" width="100" height="100" />
+
+                        @using (Html.BeginForm("Modifier_image_profil", "Prestataire", FormMethod.Post, new { enctype = "multipart/form-data" }))
+                        {
+                            <input type="file" name="file" id="file" class="inputfile" />
+                            <label for="file">Choose a file</label>
+                            <br />
+                            <input type="submit" value="Save" class="btn btn-default" />
+                        }
+
+                    </div>
+                    <div class="col-md-4">
+                        <dl class="dl-horizontal">
+
+                            <dt>
+                                La Raison sociale:
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.raison_social)
+                            </dd>
+
+                            <dt>
+                                Username:
+                            </dt>
+
+                            <dd>
+                                @Html.DisplayFor(model => model.AspNetUser.UserName)
+                            </dd>
+
+
+
+                        </dl>
+                    </div>
+
+                </div>
+            <hr>
+        </div>
+            <div id="two" style="display:none">
+                <form method="post">
+                    <h2>Modifier password</h2>
+                    <dl class="dl-horizontal">
+                        >
+                        <dt> votre ancien mot de passe :</dt>
+                        <dd><input type="password" class="form-control"  name="pass1" id="pass1" onchange="verifier()"/></dd>
+                        <dt> le nouveaux mot de passe:</dt>
+                        <dd><input type="password" class="form-control" name="pass2" id="pass2" onchange="verifier()"/></dd>
+
+
+                    </dl>
+                    <button type="submit" class="btn btn-default"> modifier </button>
+                    <hr>
+                </form>
+            </div>
+            <div id="three" style="display:none">
+                <h2 >Parametre</h2>
+            </div>
+            </div>
+    </div>
+</div>
+
+<script>
+    function verifier() {
+        a = document.getElementById("pass1").value;
+        b = document.getElementById("pass2").value;
+        if (a == b && b != null)
+        {
+            document.getElementById("pass1").style.color = color;
+            document.getElementById("pass2").style.color = color;
+           
+        }
+    }
+
+    function afficher(a) {
+        switch (a) {
+            case 1:
+                document.getElementById("one").style.display = "block";
+                document.getElementById("two").style.display = "none";
+                document.getElementById("three").style.display = "none";
+
+                break;
+            case 2:
+                document.getElementById("one").style.display = "none";
+                document.getElementById("two").style.display = "block";
+                document.getElementById("three").style.display = "none";
+                break;
+            case 3:
+                document.getElementById("one").style.display = "none";
+                document.getElementById("two").style.display = "none";
+                document.getElementById("three").style.display = "block";
+                break;
+        }
+    }
+
+$(function () {
+$('#myNav').affix({
+offset: {
+top: 100000
+}
+});
+});
+</script>

@@ -1,0 +1,261 @@
+﻿@model aplication20_07_2019.Models.MarcheViewModel
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutPrestataire.cshtml";
+}
+
+
+
+<div class="row">
+    <h4> @Html.DisplayFor(model => model.matricule)</h4>
+    <hr />
+    <div class="col-md-4">
+        
+        
+    </div>
+
+    <div class="col-md-8">
+        
+        
+        <dl class="dl-horizontal">
+            <dt>
+                libelle_projet:
+            </dt>
+            <dd>
+                @ViewBag.projet.libelle_projet
+            </dd>
+            <dt>
+                date_debut:
+            </dt>
+            <dd>
+                @ViewBag.projet.date_debut
+            </dd>
+
+        </dl>
+
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.matricule)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.matricule)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.budget_prevu)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.budget_prevu)
+            </dd>
+            <dt>
+                @Html.DisplayNameFor(model => model.date_debut)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.date_debut)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.date_fin)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.date_fin)
+            </dd>
+            <dt>
+                le nom du responsable:
+            </dt>
+
+            <dd>
+                @ViewBag.responsable.nom
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Délai)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Délai)
+            </dd>
+
+        </dl>
+
+    </div>
+    <table class="table" >
+        <tr>
+            <th>
+                Domaine
+            </th>
+            <th>
+                libelle_mission
+            </th>
+
+            
+            <th>
+                Profils
+            </th>
+            <th>
+                Charge
+            </th>
+
+
+
+
+        </tr>
+        <tbody>
+            @foreach (var item in Model.listMission)
+            {
+                <tr>
+
+                    <td>
+                        @item.domaine
+                    </td>
+                    <td>
+                        @item.libelle_mission
+                    </td>
+
+                    <td>
+                        <ul>
+                            @foreach (var item2 in item.listeprofils)
+                            {
+                                <li>@item2.libelle</li>}
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            @foreach (var item2 in item.listeprofils)
+                            {
+                                <li>@item2.charge</li>}
+                        </ul>
+                    </td>
+
+                </tr>
+            }
+        </tbody>
+    </table>
+    
+
+    <input id="b" type="button" value="Participer"  class="btn btn-default" onclick="document.getElementById('champ_montant').style.display = 'block';document.getElementById('b').style.display = 'none'" />
+
+    <div id="champ_montant" style="display:none;">
+        <form name="champ_montant" id="champ_montant" action="#" method="get">
+            Les cout sugerer par chaque profil:
+            <table class="table" id="propositio">
+                <thead>
+                    <tr>
+                        <td>profil</td>
+                        <td>Charge</td>
+                        <td>Cout unitaire</td>
+                        <td>Prix totale</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{ int i = 0;
+                        foreach (var item in ViewBag.liste_chargeparprofil)
+                        {
+
+                            <tr>
+                                <td>@item.libelle</td>
+                                <td id="cell+@i">@item.charge</td>
+
+                                <td><input type="number" id="cout+@i" oninput="calculer(@i,this.value)" value="0" /></td>
+
+                                <td><input type="number" id="couttotaleprof+@i" value="0" readonly /></td>
+                            </tr>
+                            i++;
+                        }}
+                    <tr>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                        <td>totale <p id="status"></p> :<input name="budget_propsé" type="number" id="totale" value="0" readonly /></td>
+                    </tr>
+                </tbody>
+                <tfoot></tfoot>
+            </table>
+
+            <input type="text" value=@Model.id_marché id="id_Marché" style="display:none;" />
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="text" name="id_project" id="id_project" style="display:none;" />
+                    <input type="button" value="Create" onclick="btnSave()" class="btn btn-default" />
+                </div>
+            </div>
+
+        </form>
+        
+    </div>
+</div>
+<p>
+    
+    @Html.ActionLink("Back to List", "MarchePropose")
+</p>
+<script>
+    function calculer(i, a) {
+        var cout = parseInt(document.getElementById('cell+' + i).innerHTML) * a;
+        document.getElementById("couttotaleprof+" + i).value = cout;
+        var nombre_colone = $('#propositio tr').length - 2;
+        var i = 0;
+        totale = 0;
+        for (i = 0; i < nombre_colone; i++) {
+            totale += parseInt(document.getElementById("couttotaleprof+" + i).value);
+        }
+        document.getElementById("totale").value = totale;
+        //verification si le montant est valable
+         if (@Model.budget_prevu < totale)
+         {
+                document.getElementById("totale").style.color = "red";
+                document.getElementById("status").innerHTML = "(montant non valide)";
+         }
+            else
+            {
+                document.getElementById("totale").style.color = "green";
+                document.getElementById("status").innerHTML = "(montant  valide)";
+            }
+
+    }
+
+    function btnSave()
+    {
+
+        var profilcout = new Object();
+        profilcout.id_marche = document.getElementById("id_Marché").value;
+        profilcout.budget_prestation = parseInt(document.getElementById("totale").value);
+        var l = 0;
+        var list = new Array();
+        $('#propositio > TBODY  > tr ').each(function () {
+            var row = $(this);
+            var prf_cout = new Object();
+            if (row.find("TD").eq(0).html() !=="") {
+            prf_cout.libelle = row.find("TD").eq(0).html();
+            prf_cout.cout = parseInt(document.getElementById("cout+" + l.toString()).value);
+            l++;
+            list.push(prf_cout);
+        }
+
+        });
+        alert("Vous arez participer a ce marche veuiller attendre le delais de la confirmation du responsable du marché");
+        profilcout.listeprofil_cout = list;
+        
+            $.ajax({
+
+
+                url: "/Marche/Participer",
+                type: "post",
+                dataType: "json",
+                contentType: "application/json",
+
+                data: JSON.stringify(profilcout),
+                success: function (r) {
+                    alert(r + " record(s) inserted.");
+                }
+            });
+        
+        
+    }
+
+
+</script>

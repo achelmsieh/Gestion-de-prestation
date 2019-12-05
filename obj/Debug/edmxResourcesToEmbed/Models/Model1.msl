@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="market_appModelStoreContainer" CdmEntityContainer="market_appEntities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="market_appModel.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="ContextKey" ColumnName="ContextKey" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Affectation_profils">
+      <EntityTypeMapping TypeName="market_appModel.Affectation_profils">
+        <MappingFragment StoreEntitySet="Affectation_profils">
+          <ScalarProperty Name="charge_profil" ColumnName="charge_profil" />
+          <ScalarProperty Name="id_mission_affectation" ColumnName="id_mission_affectation" />
+          <ScalarProperty Name="id_profils_affectation" ColumnName="id_profils_affectation" />
+          <ScalarProperty Name="id_affectation" ColumnName="id_affectation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetRoles">
+      <EntityTypeMapping TypeName="market_appModel.AspNetRole">
+        <MappingFragment StoreEntitySet="AspNetRoles">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserClaims">
+      <EntityTypeMapping TypeName="market_appModel.AspNetUserClaim">
+        <MappingFragment StoreEntitySet="AspNetUserClaims">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+          <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUserLogins">
+      <EntityTypeMapping TypeName="market_appModel.AspNetUserLogin">
+        <MappingFragment StoreEntitySet="AspNetUserLogins">
+          <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+          <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AspNetUsers">
+      <EntityTypeMapping TypeName="market_appModel.AspNetUser">
+        <MappingFragment StoreEntitySet="AspNetUsers">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+          <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+          <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+          <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+          <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+          <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+          <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Domaines">
+      <EntityTypeMapping TypeName="market_appModel.Domaine">
+        <MappingFragment StoreEntitySet="Domaine">
+          <ScalarProperty Name="id_domaine" ColumnName="id_domaine" />
+          <ScalarProperty Name="libelle_domaine" ColumnName="libelle_domaine" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Marché">
+      <EntityTypeMapping TypeName="market_appModel.Marché">
+        <MappingFragment StoreEntitySet="Marché">
+          <ScalarProperty Name="matricule" ColumnName="matricule" />
+          <ScalarProperty Name="budget_prevu" ColumnName="budget_prevu" />
+          <ScalarProperty Name="date_fin" ColumnName="date_fin" />
+          <ScalarProperty Name="montant_annuel" ColumnName="montant_annuel" />
+          <ScalarProperty Name="montant_total" ColumnName="montant_total" />
+          <ScalarProperty Name="id_responsable_fk" ColumnName="id_responsable_fk" />
+          <ScalarProperty Name="id_prestataire_final" ColumnName="id_prestataire_final" />
+          <ScalarProperty Name="id_projet_fk" ColumnName="id_projet_fk" />
+          <ScalarProperty Name="Délai" ColumnName="Délai" />
+          <ScalarProperty Name="date_debut" ColumnName="date_debut" />
+          <ScalarProperty Name="id_marché" ColumnName="id_marché" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="messages">
+      <EntityTypeMapping TypeName="market_appModel.message">
+        <MappingFragment StoreEntitySet="message">
+          <ScalarProperty Name="id_prestataire_k" ColumnName="id_prestataire_k" />
+          <ScalarProperty Name="id_respo_k" ColumnName="id_respo_k" />
+          <ScalarProperty Name="messaage" ColumnName="messaage" />
+          <ScalarProperty Name="objet" ColumnName="objet" />
+          <ScalarProperty Name="date_msg" ColumnName="date_msg" />
+          <ScalarProperty Name="emetteur_prestataire" ColumnName="emetteur_prestataire" />
+          <ScalarProperty Name="id_msg" ColumnName="id_msg" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Missions">
+      <EntityTypeMapping TypeName="market_appModel.Mission">
+        <MappingFragment StoreEntitySet="Mission">
+          <ScalarProperty Name="id_mission" ColumnName="id_mission" />
+          <ScalarProperty Name="date_debut_mission" ColumnName="date_debut_mission" />
+          <ScalarProperty Name="date_fin_mission" ColumnName="date_fin_mission" />
+          <ScalarProperty Name="libelle_mission" ColumnName="libelle_mission" />
+          <ScalarProperty Name="charge_jh" ColumnName="charge_jh" />
+          <ScalarProperty Name="cout_ht" ColumnName="cout_ht" />
+          <ScalarProperty Name="id_marche_mission" ColumnName="id_marche_mission" />
+          <ScalarProperty Name="id_ordreservice_fk" ColumnName="id_ordreservice_fk" />
+          <ScalarProperty Name="id_domaine_mission_fk" ColumnName="id_domaine_mission_fk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ordre_service">
+      <EntityTypeMapping TypeName="market_appModel.Ordre_service">
+        <MappingFragment StoreEntitySet="Ordre_service">
+          <ScalarProperty Name="date_modification" ColumnName="date_modification" />
+          <ScalarProperty Name="date_debut_ordre" ColumnName="date_debut_ordre" />
+          <ScalarProperty Name="date_fin_ordre" ColumnName="date_fin_ordre" />
+          <ScalarProperty Name="etat_reception" ColumnName="etat_reception" />
+          <ScalarProperty Name="date_provisoire" ColumnName="date_provisoire" />
+          <ScalarProperty Name="etat_facturation" ColumnName="etat_facturation" />
+          <ScalarProperty Name="id_ordre_service" ColumnName="id_ordre_service" />
+          <ScalarProperty Name="id_projet_ordreservice" ColumnName="id_projet_ordreservice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Participations">
+      <EntityTypeMapping TypeName="market_appModel.Participation">
+        <MappingFragment StoreEntitySet="Participation">
+          <ScalarProperty Name="id_marché_participation" ColumnName="id_marché_participation" />
+          <ScalarProperty Name="id_prestataire_participation" ColumnName="id_prestataire_participation" />
+          <ScalarProperty Name="id_participation" ColumnName="id_participation" />
+          <ScalarProperty Name="budget_prestation" ColumnName="budget_prestation" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="prestataires">
+      <EntityTypeMapping TypeName="market_appModel.prestataire">
+        <MappingFragment StoreEntitySet="prestataire">
+          <ScalarProperty Name="image_prestataire" ColumnName="image_prestataire" />
+          <ScalarProperty Name="id_prestataire" ColumnName="id_prestataire" />
+          <ScalarProperty Name="libelle" ColumnName="libelle" />
+          <ScalarProperty Name="raison_social" ColumnName="raison_social" />
+          <ScalarProperty Name="id_prestataire_user" ColumnName="id_prestataire_user" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profils">
+      <EntityTypeMapping TypeName="market_appModel.Profil">
+        <MappingFragment StoreEntitySet="Profils">
+          <ScalarProperty Name="id_profil" ColumnName="id_profil" />
+          <ScalarProperty Name="libelle_profil" ColumnName="libelle_profil" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Projets">
+      <EntityTypeMapping TypeName="market_appModel.Projet">
+        <MappingFragment StoreEntitySet="Projet">
+          <ScalarProperty Name="id_projet" ColumnName="id_projet" />
+          <ScalarProperty Name="date_debut" ColumnName="date_debut" />
+          <ScalarProperty Name="libelle_projet" ColumnName="libelle_projet" />
+          <ScalarProperty Name="cout_total" ColumnName="cout_total" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Responsable_marché">
+      <EntityTypeMapping TypeName="market_appModel.Responsable_marché">
+        <MappingFragment StoreEntitySet="Responsable_marché">
+          <ScalarProperty Name="id_responsable" ColumnName="id_responsable" />
+          <ScalarProperty Name="nom" ColumnName="nom" />
+          <ScalarProperty Name="prenom" ColumnName="prenom" />
+          <ScalarProperty Name="fonction" ColumnName="fonction" />
+          <ScalarProperty Name="email" ColumnName="email" />
+          <ScalarProperty Name="id_responsable_user" ColumnName="id_responsable_user" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="AspNetUserRoles" TypeName="market_appModel.AspNetUserRoles" StoreEntitySet="AspNetUserRoles">
+      <EndProperty Name="AspNetRoles">
+        <ScalarProperty Name="Id" ColumnName="RoleId" />
+      </EndProperty>
+      <EndProperty Name="AspNetUsers">
+        <ScalarProperty Name="Id" ColumnName="UserId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="Participation_profil">
+      <EntityTypeMapping TypeName="market_appModel.Participation_profil">
+        <MappingFragment StoreEntitySet="Participation_profil">
+          <ScalarProperty Name="id_particip_prof" ColumnName="id_particip_prof" />
+          <ScalarProperty Name="cout_unit_ht" ColumnName="cout_unit_ht" />
+          <ScalarProperty Name="id_participation_fk" ColumnName="id_participation_fk" />
+          <ScalarProperty Name="id_profil_fk" ColumnName="id_profil_fk" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

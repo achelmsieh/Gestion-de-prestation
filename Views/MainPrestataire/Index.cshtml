@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPrestataire.cshtml";
+}
+
+<style>
+    .panel-heading {
+        background-color: black;
+    }
+</style>
+<div class="text-center">
+    <text style="background-color:#FF6600">un resume de tous les information actif du prestataire :</text>
+</div>
+<div layout:fragment="content">
+
+    <div class="col-md-4">
+        <div class="panel panel-success ">
+            <div class="panel-heading ">Marche actif</div>
+            <div class="panel-body">
+                <table class="table table-hover">
+                    <tr>
+                        <th> Matricule</th>
+                        <th> Vue d'ensemble</th>
+                    </tr>
+                    @foreach (var item in ViewBag.marche_encour)
+                    {
+                        <tr>
+                            <td>@item.matricule</td>
+                            <td>
+                                <a href='@string.Format("/Marche/Dashboardresp?id_marche={0}", item.id_marché) ' class="btn btn-info"> <i class="glyphicon glyphicon-dashboard"></i></a>
+                            </td>
+                        </tr>
+
+                    }
+
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="panel panel-warning">
+            <div class="panel-heading ">Les marche en attent de validation</div>
+            <div class="panel-body">
+                <table class="table table-hover">
+                    <tr>
+                        <th> Matricule</th>
+                        <th> Vue d'ensemble</th>
+                    </tr>
+                    @foreach (var item in ViewBag.marche_enattent)
+                    {
+                        <tr>
+                            <td>@item.matricule</td>
+                            <td>
+                                <a href='@string.Format("/Marche/affecte?id_marche={0}", item.id_marché  ) ' title="Modifier" class="btn btn-info"> <i class="glyphicon glyphicon-pencil"></i></a>
+                                <a href='@string.Format("/Marche/Supprimer?id_marche={0}", item.id_marché  ) ' title="suprimer" class="btn btn-danger"> <i class="glyphicon glyphicon-remove"></i></a>
+                            </td>
+                        </tr>
+
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="panel panel-danger ">
+            <div class="panel-heading ">
+                Les marche propose
+
+            </div>
+            <div class="panel-body">
+                <table class="table table-hover">
+                    <tr>
+                        <th> Matricule</th>
+                        <th> Vue d'ensemble</th>
+                    </tr>
+                    @foreach (var item in ViewBag.marche_propose)
+                    {
+                        <tr>
+                            <td>@item.matricule</td>
+                            <td>
+                                <a href='@string.Format("/Marche/Details_Participation?id_marche={0}", item.id_marché  ) ' title="Modifier" class="btn btn-info"> <i class="glyphicon glyphicon-eye-open"></i></a>
+                                <a href='@string.Format("/Marche/Refuser?id_marche={0}", item.id_marché  ) ' title="suprimer" class="btn btn-danger"> <i class="glyphicon glyphicon-remove"></i></a>
+
+                            </td>
+                        </tr>
+
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+
+      

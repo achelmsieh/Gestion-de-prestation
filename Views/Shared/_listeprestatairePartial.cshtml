@@ -1,0 +1,19 @@
+﻿@model IEnumerable<aplication20_07_2019.Models.prestataire>
+
+<table class="table">
+    
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            
+            <td>
+                @Html.DisplayFor(modelItem => item.libelle)
+            </td>
+
+            
+            
+        </tr>
+    }
+
+</table>

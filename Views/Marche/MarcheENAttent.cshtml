@@ -1,0 +1,58 @@
+﻿@model IEnumerable<aplication20_07_2019.Models.Marché>
+
+@{
+    ViewBag.Title = "MarcheENAttent";
+    Layout = "~/Views/Shared/_LayoutPrestataire.cshtml";
+}
+
+<h2>Marche en Attent d'affectation </h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.matricule)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.budget_prevu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.date_fin)
+        </th>
+        
+        
+        
+        
+        <th>
+            @Html.DisplayNameFor(model => model.Délai)
+        </th>
+        
+        
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.matricule)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.budget_prevu)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.date_fin)
+        </td>
+       
+        <td>
+            @Html.DisplayFor(modelItem => item.Délai)
+        </td>
+        
+        <td>
+             <a href='@string.Format("/Marche/affecte?id_marche={0}", item.id_marché  ) 'title="Modifier" class="btn btn-info"> <i class="glyphicon glyphicon-pencil"></i></a>
+                <a href='@string.Format("/Marche/Supprimer?id_marche={0}", item.id_marché  ) 'title="suprimer" class="btn btn-danger" > <i class="glyphicon glyphicon-remove"></i></a>
+
+        </td>
+    </tr>
+}
+
+</table>

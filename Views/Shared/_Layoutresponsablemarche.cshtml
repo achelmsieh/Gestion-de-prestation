@@ -1,0 +1,153 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - Oncf-Market</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <style>
+        .error{
+            color:red;
+        }
+
+        #information_projet {
+            position: absolute;
+            top: 75px;
+            right: 25px;
+        }
+
+        html, body {
+            margin: 0px;
+            padding: 0px;
+        }
+
+        * {
+            margin: 0px;
+            padding: 0;
+            font-family: sans-serif;
+        }
+
+        #changeback {
+            color: white;
+            height: 40px;
+            position: fixed;
+            bottom: 0%;
+            width: 100%;
+            background-color: #151719;
+            opacity: 1;
+        }
+
+        #sidebar {
+            position: fixed;
+            width: 25%;
+            height: 100%;
+            background: #151719;
+            left: 0%;
+            transition: all 500ms linear;
+            position: absolute;
+            z-index: 1000;
+        }
+
+            #sidebar.active {
+                left: 0px;
+            }
+
+            #sidebar ul li {
+                color: White;
+                list-style: none;
+                padding: 15px 10px;
+                border-bottom: 1px solid rgba(100,100,100,0.3);
+            }
+
+            #sidebar .toggle-btn {
+                position: absolute;
+                Left: 400px;
+                top: 20px;
+            }
+
+                #sidebar .toggle-btn span {
+                    display: block;
+                    width: 30px;
+                    height: 5px;
+                    background: #151719;
+                    margin: 5px 0px;
+                }
+    </style>
+
+
+    <nav>
+        <div class="navbar navbar-inverse nav-tabs  ">
+            <div class="container-fluid">
+                <ul class="nav navbar-nav">
+                    <li><img src="~/Views/img/Logo-oncf.png" height="30" width="50" /></li>
+                    <li><a href="~/MainResponsable/Information_personnel">Votre profil</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Gestion Prestataire<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Prestataire/Index">List des Prestaire</a></li>
+                            <li><a href="/Marche/Mes_Prestatire">Mes prestatire</a></li>
+                            
+                        </ul>
+                    </li>
+                    <li><a href="/Project">Gestion Projet</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                            Gestion Marche <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Marche/Create">Creer un marche</a></li>
+                            <li><a href="/Marche/MarcheENAttentRSP">affecter Marche</a></li>
+                            <li><a href="/Marche/MarcheencourRsp">Marche en cours </a></li>
+                            <li><a href="/Marche/MarcheHistoriqueRsp">Marche en historique</a></li>
+
+                        </ul>
+                    </li>
+                    <li><a href="~/Message/Contact">Contact</a></li>
+                    <li><a href="~/MainResponsable/About">A propos</a></li>
+                </ul>
+
+                @Html.Partial("_LoginPartial")
+
+            </div>
+        </div>
+    </nav>
+
+
+
+
+
+
+
+    <div class="container body-content">
+        @RenderBody()
+
+        <br />
+        <br>
+        <br>
+        <br>
+    </div>
+    <footer class="page-footer font-small blue pt-4 " id="changeback">
+        <div class=" text-center  py-3">
+
+
+
+            oncf Market
+        </div>
+        <!-- Copyright -->
+
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+   
+<script src="~/Scripts/json2.js"></script>
+<!--<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/jquery-3.3.1.min.js"></script>-->
+<script src="~/Scripts/jquery.validate.min.js"></script>
+<script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+</body>
+</html>

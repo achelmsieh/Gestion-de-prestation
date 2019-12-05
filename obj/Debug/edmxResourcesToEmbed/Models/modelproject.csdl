@@ -1,0 +1,478 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="marketModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+      <PropertyRef Name="ContextKey" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="150" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ContextKey" Type="String" MaxLength="300" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Affectation_profils">
+    <Key>
+      <PropertyRef Name="id_affectation" />
+    </Key>
+    <Property Name="id_mission_affectation" Type="Int32" Nullable="false" />
+    <Property Name="id_profils_affectation" Type="Int32" Nullable="false" />
+    <Property Name="id_affectation" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Mission" Relationship="Self.FK_Affectation_profils_Mission" FromRole="Affectation_profils" ToRole="Mission" />
+    <NavigationProperty Name="Profil" Relationship="Self.FK_Affectation_profils_Profils" FromRole="Affectation_profils" ToRole="Profils" />
+  </EntityType>
+  <EntityType Name="AspNetRole">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUsers" Relationship="Self.AspNetUserRoles" FromRole="AspNetRoles" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserClaim">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUserClaims" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUserLogin">
+    <Key>
+      <PropertyRef Name="LoginProvider" />
+      <PropertyRef Name="ProviderKey" />
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Name="LoginProvider" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ProviderKey" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserId" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUserLogins" ToRole="AspNetUsers" />
+  </EntityType>
+  <EntityType Name="AspNetUser">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+    <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+    <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+    <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+    <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="AspNetUserClaims" Relationship="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserClaims" />
+    <NavigationProperty Name="AspNetUserLogins" Relationship="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" FromRole="AspNetUsers" ToRole="AspNetUserLogins" />
+    <NavigationProperty Name="prestataires" Relationship="Self.FK_prestataire_AspNetUsers" FromRole="AspNetUsers" ToRole="prestataire" />
+    <NavigationProperty Name="Responsable_marché" Relationship="Self.FK_Responsable_marché_AspNetUsers" FromRole="AspNetUsers" ToRole="Responsable_marché" />
+    <NavigationProperty Name="AspNetRoles" Relationship="Self.AspNetUserRoles" FromRole="AspNetUsers" ToRole="AspNetRoles" />
+  </EntityType>
+  <EntityType Name="Marché">
+    <Key>
+      <PropertyRef Name="id_marché" />
+    </Key>
+    <Property Name="id_marché" Type="Int32" Nullable="false" />
+    <Property Name="budget_prevu" Type="Int32" />
+    <Property Name="date_fin" Type="DateTime" Precision="0" />
+    <Property Name="montant_annuel" Type="Int32" />
+    <Property Name="montant_total" Type="Int32" />
+    <Property Name="id_responsable_fk" Type="Int32" />
+    <Property Name="id_prestataire_final" Type="Int32" />
+    <Property Name="id_projet_fk" Type="Int32" />
+    <NavigationProperty Name="prestataire" Relationship="Self.FK_Marché_prestataire" FromRole="Marché" ToRole="prestataire" />
+    <NavigationProperty Name="Projet" Relationship="Self.FK_Marché_Projet" FromRole="Marché" ToRole="Projet" />
+    <NavigationProperty Name="Responsable_marché" Relationship="Self.FK_Marché_Responsable_marché" FromRole="Marché" ToRole="Responsable_marché" />
+    <NavigationProperty Name="Missions" Relationship="Self.FK_Mission_Marché1" FromRole="Marché" ToRole="Mission" />
+    <NavigationProperty Name="Participations" Relationship="Self.FK_Participation_Marché" FromRole="Marché" ToRole="Participation" />
+  </EntityType>
+  <EntityType Name="message">
+    <Key>
+      <PropertyRef Name="id_msg" />
+    </Key>
+    <Property Name="id_prestataire_k" Type="Int32" Nullable="false" />
+    <Property Name="id_respo_k" Type="Int32" Nullable="false" />
+    <Property Name="messaage" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="objet" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="date_msg" Type="DateTime" Precision="0" />
+    <Property Name="emetteur_prestataire" Type="Boolean" />
+    <Property Name="id_msg" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="prestataire" Relationship="Self.FK_message_prestataire" FromRole="message" ToRole="prestataire" />
+    <NavigationProperty Name="Responsable_marché" Relationship="Self.FK_message_Responsable_marché" FromRole="message" ToRole="Responsable_marché" />
+  </EntityType>
+  <EntityType Name="Mission">
+    <Key>
+      <PropertyRef Name="id_mission" />
+    </Key>
+    <Property Name="id_mission" Type="Int32" Nullable="false" />
+    <Property Name="date_debut_mission" Type="DateTime" Precision="0" />
+    <Property Name="date_fin_mission" Type="DateTime" Precision="0" />
+    <Property Name="libelle_mission" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="charge_jh" Type="Double" />
+    <Property Name="cout_ht" Type="Double" />
+    <Property Name="id_marche_mission" Type="Int32" />
+    <Property Name="id_ordreservice_fk" Type="Int32" />
+    <NavigationProperty Name="Affectation_profils" Relationship="Self.FK_Affectation_profils_Mission" FromRole="Mission" ToRole="Affectation_profils" />
+    <NavigationProperty Name="Marché" Relationship="Self.FK_Mission_Marché1" FromRole="Mission" ToRole="Marché" />
+    <NavigationProperty Name="Ordre_service" Relationship="Self.FK_Mission_Ordre_service" FromRole="Mission" ToRole="Ordre_service" />
+  </EntityType>
+  <EntityType Name="Ordre_service">
+    <Key>
+      <PropertyRef Name="id_ordre_service" />
+    </Key>
+    <Property Name="date_modification" Type="DateTime" Precision="0" />
+    <Property Name="date_debut_ordre" Type="DateTime" Precision="0" />
+    <Property Name="date_fin_ordre" Type="DateTime" Precision="0" />
+    <Property Name="etat_reception" Type="Boolean" />
+    <Property Name="date_provisoire" Type="DateTime" Precision="0" />
+    <Property Name="etat_facturation" Type="Boolean" />
+    <Property Name="id_ordre_service" Type="Int32" Nullable="false" />
+    <Property Name="id_projet_ordreservice" Type="Int32" />
+    <NavigationProperty Name="Missions" Relationship="Self.FK_Mission_Ordre_service" FromRole="Ordre_service" ToRole="Mission" />
+    <NavigationProperty Name="Projet" Relationship="Self.FK_Ordre_service_Projet1" FromRole="Ordre_service" ToRole="Projet" />
+  </EntityType>
+  <EntityType Name="Participation">
+    <Key>
+      <PropertyRef Name="id_participation" />
+    </Key>
+    <Property Name="id_marché_participation" Type="Int32" Nullable="false" />
+    <Property Name="id_prestataire_participation" Type="Int32" Nullable="false" />
+    <Property Name="id_participation" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <NavigationProperty Name="Marché" Relationship="Self.FK_Participation_Marché" FromRole="Participation" ToRole="Marché" />
+    <NavigationProperty Name="prestataire" Relationship="Self.FK_Participation_prestataire" FromRole="Participation" ToRole="prestataire" />
+  </EntityType>
+  <EntityType Name="prestataire">
+    <Key>
+      <PropertyRef Name="id_prestataire" />
+    </Key>
+    <Property Name="id_prestataire" Type="Int32" Nullable="false" />
+    <Property Name="libelle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="raison_social" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id_prestataire_user" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_prestataire_AspNetUsers" FromRole="prestataire" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Marché" Relationship="Self.FK_Marché_prestataire" FromRole="prestataire" ToRole="Marché" />
+    <NavigationProperty Name="messages" Relationship="Self.FK_message_prestataire" FromRole="prestataire" ToRole="message" />
+    <NavigationProperty Name="Participations" Relationship="Self.FK_Participation_prestataire" FromRole="prestataire" ToRole="Participation" />
+  </EntityType>
+  <EntityType Name="Profil">
+    <Key>
+      <PropertyRef Name="id_profil" />
+    </Key>
+    <Property Name="id_profil" Type="Int32" Nullable="false" />
+    <Property Name="libelle_profil" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="Affectation_profils" Relationship="Self.FK_Affectation_profils_Profils" FromRole="Profils" ToRole="Affectation_profils" />
+  </EntityType>
+  <EntityType Name="Projet">
+    <Key>
+      <PropertyRef Name="id_projet" />
+    </Key>
+    <Property Name="id_projet" Type="Int32" Nullable="false" />
+    <Property Name="date_debut" Type="DateTime" Precision="0" />
+    <Property Name="libelle_projet" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cout_total" Type="Int32" />
+    <NavigationProperty Name="Marché" Relationship="Self.FK_Marché_Projet" FromRole="Projet" ToRole="Marché" />
+    <NavigationProperty Name="Ordre_service" Relationship="Self.FK_Ordre_service_Projet1" FromRole="Projet" ToRole="Ordre_service" />
+  </EntityType>
+  <EntityType Name="Responsable_marché">
+    <Key>
+      <PropertyRef Name="id_responsable" />
+    </Key>
+    <Property Name="id_responsable" Type="Int32" Nullable="false" />
+    <Property Name="nom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="prenom" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="fonction" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="id_responsable_user" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Responsable_marché_AspNetUsers" FromRole="Responsable_marché" ToRole="AspNetUsers" />
+    <NavigationProperty Name="Marché" Relationship="Self.FK_Marché_Responsable_marché" FromRole="Responsable_marché" ToRole="Marché" />
+    <NavigationProperty Name="messages" Relationship="Self.FK_message_Responsable_marché" FromRole="Responsable_marché" ToRole="message" />
+  </EntityType>
+  <Association Name="FK_Affectation_profils_Mission">
+    <End Role="Mission" Type="Self.Mission" Multiplicity="1" />
+    <End Role="Affectation_profils" Type="Self.Affectation_profils" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Mission">
+        <PropertyRef Name="id_mission" />
+      </Principal>
+      <Dependent Role="Affectation_profils">
+        <PropertyRef Name="id_mission_affectation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Affectation_profils_Profils">
+    <End Role="Profils" Type="Self.Profil" Multiplicity="1" />
+    <End Role="Affectation_profils" Type="Self.Affectation_profils" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Profils">
+        <PropertyRef Name="id_profil" />
+      </Principal>
+      <Dependent Role="Affectation_profils">
+        <PropertyRef Name="id_profils_affectation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserClaims" Type="Self.AspNetUserClaim" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserClaims">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="AspNetUserLogins" Type="Self.AspNetUserLogin" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="AspNetUserLogins">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_prestataire_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="prestataire" Type="Self.prestataire" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="prestataire">
+        <PropertyRef Name="id_prestataire_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Responsable_marché_AspNetUsers">
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+    <End Role="Responsable_marché" Type="Self.Responsable_marché" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="AspNetUsers">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Responsable_marché">
+        <PropertyRef Name="id_responsable_user" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Marché_prestataire">
+    <End Role="prestataire" Type="Self.prestataire" Multiplicity="0..1" />
+    <End Role="Marché" Type="Self.Marché" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="prestataire">
+        <PropertyRef Name="id_prestataire" />
+      </Principal>
+      <Dependent Role="Marché">
+        <PropertyRef Name="id_prestataire_final" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Marché_Projet">
+    <End Role="Projet" Type="Self.Projet" Multiplicity="0..1" />
+    <End Role="Marché" Type="Self.Marché" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projet">
+        <PropertyRef Name="id_projet" />
+      </Principal>
+      <Dependent Role="Marché">
+        <PropertyRef Name="id_projet_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Marché_Responsable_marché">
+    <End Role="Responsable_marché" Type="Self.Responsable_marché" Multiplicity="0..1" />
+    <End Role="Marché" Type="Self.Marché" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Responsable_marché">
+        <PropertyRef Name="id_responsable" />
+      </Principal>
+      <Dependent Role="Marché">
+        <PropertyRef Name="id_responsable_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mission_Marché1">
+    <End Role="Marché" Type="Self.Marché" Multiplicity="0..1" />
+    <End Role="Mission" Type="Self.Mission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marché">
+        <PropertyRef Name="id_marché" />
+      </Principal>
+      <Dependent Role="Mission">
+        <PropertyRef Name="id_marche_mission" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Participation_Marché">
+    <End Role="Marché" Type="Self.Marché" Multiplicity="1" />
+    <End Role="Participation" Type="Self.Participation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Marché">
+        <PropertyRef Name="id_marché" />
+      </Principal>
+      <Dependent Role="Participation">
+        <PropertyRef Name="id_marché_participation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_message_prestataire">
+    <End Role="prestataire" Type="Self.prestataire" Multiplicity="1" />
+    <End Role="message" Type="Self.message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="prestataire">
+        <PropertyRef Name="id_prestataire" />
+      </Principal>
+      <Dependent Role="message">
+        <PropertyRef Name="id_prestataire_k" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_message_Responsable_marché">
+    <End Role="Responsable_marché" Type="Self.Responsable_marché" Multiplicity="1" />
+    <End Role="message" Type="Self.message" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Responsable_marché">
+        <PropertyRef Name="id_responsable" />
+      </Principal>
+      <Dependent Role="message">
+        <PropertyRef Name="id_respo_k" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Mission_Ordre_service">
+    <End Role="Ordre_service" Type="Self.Ordre_service" Multiplicity="0..1" />
+    <End Role="Mission" Type="Self.Mission" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Ordre_service">
+        <PropertyRef Name="id_ordre_service" />
+      </Principal>
+      <Dependent Role="Mission">
+        <PropertyRef Name="id_ordreservice_fk" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Ordre_service_Projet1">
+    <End Role="Projet" Type="Self.Projet" Multiplicity="0..1" />
+    <End Role="Ordre_service" Type="Self.Ordre_service" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Projet">
+        <PropertyRef Name="id_projet" />
+      </Principal>
+      <Dependent Role="Ordre_service">
+        <PropertyRef Name="id_projet_ordreservice" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Participation_prestataire">
+    <End Role="prestataire" Type="Self.prestataire" Multiplicity="1" />
+    <End Role="Participation" Type="Self.Participation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="prestataire">
+        <PropertyRef Name="id_prestataire" />
+      </Principal>
+      <Dependent Role="Participation">
+        <PropertyRef Name="id_marché_participation" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="AspNetUserRoles">
+    <End Role="AspNetRoles" Type="Self.AspNetRole" Multiplicity="*" />
+    <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="marketEntities1" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="Affectation_profils" EntityType="Self.Affectation_profils" />
+    <EntitySet Name="AspNetRoles" EntityType="Self.AspNetRole" />
+    <EntitySet Name="AspNetUserClaims" EntityType="Self.AspNetUserClaim" />
+    <EntitySet Name="AspNetUserLogins" EntityType="Self.AspNetUserLogin" />
+    <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+    <EntitySet Name="Marché" EntityType="Self.Marché" />
+    <EntitySet Name="messages" EntityType="Self.message" />
+    <EntitySet Name="Missions" EntityType="Self.Mission" />
+    <EntitySet Name="Ordre_service" EntityType="Self.Ordre_service" />
+    <EntitySet Name="Participations" EntityType="Self.Participation" />
+    <EntitySet Name="prestataires" EntityType="Self.prestataire" />
+    <EntitySet Name="Profils" EntityType="Self.Profil" />
+    <EntitySet Name="Projets" EntityType="Self.Projet" />
+    <EntitySet Name="Responsable_marché" EntityType="Self.Responsable_marché" />
+    <AssociationSet Name="FK_Affectation_profils_Mission" Association="Self.FK_Affectation_profils_Mission">
+      <End Role="Mission" EntitySet="Missions" />
+      <End Role="Affectation_profils" EntitySet="Affectation_profils" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Affectation_profils_Profils" Association="Self.FK_Affectation_profils_Profils">
+      <End Role="Profils" EntitySet="Profils" />
+      <End Role="Affectation_profils" EntitySet="Affectation_profils" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserClaims_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserClaims" EntitySet="AspNetUserClaims" />
+    </AssociationSet>
+    <AssociationSet Name="FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId" Association="Self.FK_dbo_AspNetUserLogins_dbo_AspNetUsers_UserId">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="AspNetUserLogins" EntitySet="AspNetUserLogins" />
+    </AssociationSet>
+    <AssociationSet Name="FK_prestataire_AspNetUsers" Association="Self.FK_prestataire_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="prestataire" EntitySet="prestataires" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Responsable_marché_AspNetUsers" Association="Self.FK_Responsable_marché_AspNetUsers">
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+      <End Role="Responsable_marché" EntitySet="Responsable_marché" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Marché_prestataire" Association="Self.FK_Marché_prestataire">
+      <End Role="prestataire" EntitySet="prestataires" />
+      <End Role="Marché" EntitySet="Marché" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Marché_Projet" Association="Self.FK_Marché_Projet">
+      <End Role="Projet" EntitySet="Projets" />
+      <End Role="Marché" EntitySet="Marché" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Marché_Responsable_marché" Association="Self.FK_Marché_Responsable_marché">
+      <End Role="Responsable_marché" EntitySet="Responsable_marché" />
+      <End Role="Marché" EntitySet="Marché" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mission_Marché1" Association="Self.FK_Mission_Marché1">
+      <End Role="Marché" EntitySet="Marché" />
+      <End Role="Mission" EntitySet="Missions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Participation_Marché" Association="Self.FK_Participation_Marché">
+      <End Role="Marché" EntitySet="Marché" />
+      <End Role="Participation" EntitySet="Participations" />
+    </AssociationSet>
+    <AssociationSet Name="FK_message_prestataire" Association="Self.FK_message_prestataire">
+      <End Role="prestataire" EntitySet="prestataires" />
+      <End Role="message" EntitySet="messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_message_Responsable_marché" Association="Self.FK_message_Responsable_marché">
+      <End Role="Responsable_marché" EntitySet="Responsable_marché" />
+      <End Role="message" EntitySet="messages" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Mission_Ordre_service" Association="Self.FK_Mission_Ordre_service">
+      <End Role="Ordre_service" EntitySet="Ordre_service" />
+      <End Role="Mission" EntitySet="Missions" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Ordre_service_Projet1" Association="Self.FK_Ordre_service_Projet1">
+      <End Role="Projet" EntitySet="Projets" />
+      <End Role="Ordre_service" EntitySet="Ordre_service" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Participation_prestataire" Association="Self.FK_Participation_prestataire">
+      <End Role="prestataire" EntitySet="prestataires" />
+      <End Role="Participation" EntitySet="Participations" />
+    </AssociationSet>
+    <AssociationSet Name="AspNetUserRoles" Association="Self.AspNetUserRoles">
+      <End Role="AspNetRoles" EntitySet="AspNetRoles" />
+      <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

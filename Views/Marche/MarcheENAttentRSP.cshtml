@@ -1,0 +1,71 @@
+﻿@model IEnumerable<aplication20_07_2019.Models.viewmodel.Marche_nombreParticipation>
+
+@{
+    ViewBag.Title = "MarcheENAttent";
+    Layout = "~/Views/Shared/_Layoutresponsablemarche.cshtml";
+}
+
+    <h2>Marché en Attente d'affectation</h2>
+
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.marche.matricule)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.marche.budget_prevu)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.marche.date_fin)
+        </th>
+
+
+
+
+        <th>
+            @Html.DisplayNameFor(model => model.marche.Délai)
+        </th>
+        <th>
+            Nombre de Prestataire 
+        </th>
+        <th>
+           Nombre de Réponse
+        </th>
+
+        <th>les action </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.marche.matricule)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.marche.budget_prevu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.marche.date_fin)
+            </td>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.marche.Délai)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre_prestataire_affecte)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.nombre_patipation)
+            </td>
+
+            <td>
+                
+                <a href='@string.Format("/Marche/affecte?id_marche={0}", item.marche.id_marché  ) 'title="affecte le marche" class="btn btn-info"> <i class="glyphicon glyphicon-ok-sign"></i></a>
+                <a href='@string.Format("/Marche/Supprimer?id_marche={0}", item.marche.id_marché  ) 'title="Supprimer" class="btn btn-danger" > <i class="glyphicon glyphicon-remove"></i></a>
+
+            </td>
+        </tr>
+    }
+
+</table>
